@@ -1,4 +1,4 @@
-package me.CHANGEME.slimefunaddon;
+package me.lucasgithuber.randomexpansion;
 
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
