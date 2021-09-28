@@ -1,4 +1,4 @@
-package me.lucasgithuber.randomexpansion;
+package io.github.lucasgithuber.randomexpansion;
 
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -69,7 +69,7 @@ class ExampleAddon extends JavaPlugin implements SlimefunAddon {
     @Override
     public String getBugTrackerURL() {
         // You can return a link to your Bug Tracker instead of null here
-        return null;
+        return "https://github.com/lucasGithuber/RandomExpansion/issues";
     }
 
     @Override
