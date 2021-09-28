@@ -13,7 +13,7 @@ import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.config.Config;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 
-public final class RandomExpansion extends JavaPlugin implements SlimefunAddon {
+class ExampleAddon extends JavaPlugin implements SlimefunAddon {
 
     @Override
     public void onEnable() {
@@ -21,13 +21,14 @@ public final class RandomExpansion extends JavaPlugin implements SlimefunAddon {
         Config cfg = new Config(this);
 
         if (cfg.getBoolean("options.auto-update")) {
-            //auto updater, IDK how to make this lol
+            // You could start an Auto-Updater for example
         }
+
         /*
          * 1. Creating a new Category
          * This Category will use the following ItemStack
          */
-        ItemStack itemGroupItem = new CustomItemStack(Material.DIAMOND, "&4Addon Category", "abc", "&a> Click to open");
+        ItemStack itemGroupItem = new CustomItemStack(Material.DIAMOND, "&4Addon Category", "", "&a> Click to open");
 
         // Give your Category a unique id.
         NamespacedKey itemGroupId = new NamespacedKey(this, "addon_category");
@@ -79,4 +80,5 @@ public final class RandomExpansion extends JavaPlugin implements SlimefunAddon {
          */
         return this;
     }
+
 }
