@@ -1,4 +1,4 @@
-package me.lucasgithuber.randomexpansion;
+package io.github.lucasgithuber.randomexpansion;
 
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -20,9 +20,7 @@ class ExampleAddon extends JavaPlugin implements SlimefunAddon {
         // Read something from your config.yml
         Config cfg = new Config(this);
 
-        if (cfg.getBoolean("options.auto-update")) {
-            // You could start an Auto-Updater for example
-        }
+        cfg.getBoolean("options.auto-update");// You could start an Auto-Updater for example
 
         /*
          * 1. Creating a new Category
@@ -69,7 +67,7 @@ class ExampleAddon extends JavaPlugin implements SlimefunAddon {
     @Override
     public String getBugTrackerURL() {
         // You can return a link to your Bug Tracker instead of null here
-        return null;
+        return "https://github.com/lucasGithuber/RandomExpansion/issues";
     }
 
     @Override
