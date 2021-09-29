@@ -1,5 +1,6 @@
 package me.lucasgithuber.randomexpansion;
 
+import io.github.thebusybiscuit.slimefun4.implementation.listeners.entity.MobDropListener;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
@@ -28,7 +29,7 @@ public class RandomExpansion extends JavaPlugin implements SlimefunAddon {
          * 1. Creating a new Category
          * This Category will use the following ItemStack
          */
-        ItemStack itemGroupItem = new CustomItemStack(Material.WARPED_WART_BLOCK, "&Addon Category", "", "&a> Click to open");
+        ItemStack itemGroupItem = new CustomItemStack(Material.WARPED_WART_BLOCK, "&aRandom Expansion", "", "&a> Click to open");
 
         // Give your Category a unique id.
         NamespacedKey itemGroupId = new NamespacedKey(this, "Random_Category");
@@ -48,7 +49,7 @@ public class RandomExpansion extends JavaPlugin implements SlimefunAddon {
          * The machine in which this recipe is crafted in is specified
          * further down as the RecipeType.
          */
-        ItemStack[] recipe = { null, null, null, null, null, null, null, null, null };
+        ItemStack[] recipe = { null, null, null, new ItemStack(Material.PHANTOM_MEMBRANE), null, null, null, null, null };
 
         /*
          * 4. Registering the Item
