@@ -1,5 +1,6 @@
 package me.lucasgithuber.randomexpansion;
 
+import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.implementation.listeners.entity.MobDropListener;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -25,41 +26,17 @@ public class RandomExpansion extends JavaPlugin implements SlimefunAddon {
             // You could start an Auto-Updater for example
         }
 
-        /*
-         * 1. Creating a new Category
-         * This Category will use the following ItemStack
-         */
         ItemStack itemGroupItem = new CustomItemStack(Material.WARPED_WART_BLOCK, "&aRandom Expansion", "", "&a> Click to open");
 
-        // Give your Category a unique id.
         NamespacedKey itemGroupId = new NamespacedKey(this, "Random_Category");
         ItemGroup itemGroup = new ItemGroup(itemGroupId, itemGroupItem);
 
-        /*
-         * 2. Create a new SlimefunItemStack
-         * This class has many constructors, it is very important
-         * that you give each item a unique id.
-         */
         SlimefunItemStack slimefunItem = new SlimefunItemStack("MONSTER_SCALE", Material.PHANTOM_MEMBRANE, "&4Monster scale", "&cDropped By The Monster Under The Bed");
 
-        /*
-         * 3. Creating a Recipe
-         * The Recipe is an ItemStack Array with a length of 9.
-         * It represents a Shaped Recipe in a 3x3 crafting grid.
-         * The machine in which this recipe is crafted in is specified
-         * further down as the RecipeType.
-         */
         ItemStack[] recipe = { null, null, null, new ItemStack(Material.PHANTOM_MEMBRANE), null, null, null, null, null };
 
-        /*
-         * 4. Registering the Item
-         * Now you just have to register the item.
-         * RecipeType.ENHANCED_CRAFTING_TABLE refers to the machine in
-         * which this item is crafted in.
-         * Recipe Types from Slimefun itself will automatically add the recipe to that machine.
-         */
-        SlimefunItem item = new SlimefunItem(itemGroup, slimefunItem, RecipeType.MOB_DROP, recipe);
-        item.register(this);
+        SlimefunItem MONSTER_SCALE = new SlimefunItem(itemGroup, slimefunItem, RecipeType.MOB_DROP, recipe);
+        MONSTER_SCALE.register(this);
     }
 
     @Override
