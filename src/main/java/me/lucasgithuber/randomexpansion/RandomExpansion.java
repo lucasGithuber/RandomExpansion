@@ -1,39 +1,105 @@
 package me.lucasgithuber.randomexpansion;
 
-import io.github.mooy1.infinitylib.core.AbstractAddon;
-import me.lucasgithuber.randomexpansion.Resources.MONSTER_SCALE;
+import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
+import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.config.Config;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
+import me.lucasgithuber.randomexpansion.Resources.REINFORCED_PHANTOM_MEMBRANE;
+import me.lucasgithuber.randomexpansion.gear.MONSTER_BOOTS;
+import me.lucasgithuber.randomexpansion.gear.MONSTER_CHEST;
+import me.lucasgithuber.randomexpansion.gear.MONSTER_HELMET;
+import me.lucasgithuber.randomexpansion.gear.MONSTER_LEGGINGS;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.java.JavaPlugin;
 
-public final class RandomExpansion extends AbstractAddon {
+public class RandomExpansion extends JavaPlugin implements SlimefunAddon {
 
-    public RandomExpansion() {
-        super("lucasGithuber", "RandomExpansion", "master", "auto-update");
+    @Override
+    public void onEnable() {
+        // Read something from your config.yml
+        Config cfg = new Config(this);
+
+        if (cfg.getBoolean("options.auto-update")) {
+            // You could start an Auto-Updater for example
+        }
+        ItemStack itemGroupItem = new CustomItemStack(Material.COMMAND_BLOCK, "&4Random Expansion", "", "&a> Adds random things, Click to open");
+
+        NamespacedKey itemGroupId = new NamespacedKey(this, "RANDOMEXPANSION");
+        ItemGroup itemGroup = new ItemGroup(itemGroupId, itemGroupItem);
+
+        /*
+         *reinforced membrane
+         */
+        SlimefunItemStack REINFORCED_PHANTOM_MEMBRANE = new SlimefunItemStack("REINFORCED_PHANTOM_MEMBRANE", Material.PHANTOM_MEMBRANE, "&b&lReinforced Phantom Membrane ", "&nResistant membrane for making monster armor");
+
+        ItemStack[] recipe = {SlimefunItems.HARDENED_METAL_INGOT, SlimefunItems.REINFORCED_PLATE, SlimefunItems.HARDENED_METAL_INGOT,
+                SlimefunItems.REINFORCED_PLATE, new ItemStack(Material.PHANTOM_MEMBRANE), SlimefunItems.REINFORCED_PLATE,
+                SlimefunItems.HARDENED_METAL_INGOT, SlimefunItems.REINFORCED_PLATE, SlimefunItems.HARDENED_METAL_INGOT};
+
+        new REINFORCED_PHANTOM_MEMBRANE(itemGroup, REINFORCED_PHANTOM_MEMBRANE, RecipeType.ENHANCED_CRAFTING_TABLE, recipe).register(this);
+         /*
+         *monster helmet i guess
+         */
+        SlimefunItemStack MONSTER_HELMET = new SlimefunItemStack("MONSTER_HELMET", Material.CHAINMAIL_HELMET, "&8Monster Helmet ", "&8+25% spookiness! gives night vision");
+
+        ItemStack[] MONSTER_HELMET_RECIPE = {SlimefunItems.SYNTHETIC_SAPPHIRE, REINFORCED_PHANTOM_MEMBRANE , SlimefunItems.SYNTHETIC_SAPPHIRE,
+                REINFORCED_PHANTOM_MEMBRANE, null, REINFORCED_PHANTOM_MEMBRANE,
+                null, null, null,};
+
+        new MONSTER_HELMET(itemGroup, MONSTER_HELMET, RecipeType.ARMOR_FORGE, MONSTER_HELMET_RECIPE).register(this);
+         /*
+         *monster chestplate
+         */
+
+        SlimefunItemStack MONSTER_CHEST = new SlimefunItemStack("MONSTER_CHESTPLATE", Material.CHAINMAIL_CHESTPLATE, "&8Monster Chestplate ", "&8+25% spookiness!");
+
+        ItemStack[] MONSTER_CHEST_RECIPE = {REINFORCED_PHANTOM_MEMBRANE, null, REINFORCED_PHANTOM_MEMBRANE,
+                REINFORCED_PHANTOM_MEMBRANE, SlimefunItems.SYNTHETIC_SAPPHIRE, REINFORCED_PHANTOM_MEMBRANE,
+                REINFORCED_PHANTOM_MEMBRANE, REINFORCED_PHANTOM_MEMBRANE, REINFORCED_PHANTOM_MEMBRANE,};
+
+        new MONSTER_CHEST(itemGroup, MONSTER_CHEST, RecipeType.ARMOR_FORGE, MONSTER_CHEST_RECIPE).register(this);
+        /*
+         *monster leggings yikes
+         */
+
+        SlimefunItemStack MONSTER_LEGGINGS = new SlimefunItemStack("MONSTER_LEGGINGS", Material.CHAINMAIL_LEGGINGS, "&8Monster Leggings ", "&8+25% spookiness!");
+
+        ItemStack[] MONSTER_LEGGINGS_RECIPE = {SlimefunItems.SYNTHETIC_SAPPHIRE, REINFORCED_PHANTOM_MEMBRANE, SlimefunItems.SYNTHETIC_SAPPHIRE,
+                REINFORCED_PHANTOM_MEMBRANE, null, REINFORCED_PHANTOM_MEMBRANE,
+                REINFORCED_PHANTOM_MEMBRANE, null, REINFORCED_PHANTOM_MEMBRANE,};
+
+        new MONSTER_LEGGINGS(itemGroup, MONSTER_LEGGINGS, RecipeType.ARMOR_FORGE, MONSTER_LEGGINGS_RECIPE).register(this);
+        /*
+         *monster boots '-' what did u expect
+         */
+
+        SlimefunItemStack MONSTER_BOOTS = new SlimefunItemStack("MONSTER_BOOTS", Material.CHAINMAIL_BOOTS, "&8Monster Boots ", "&8+25% spookiness!");
+
+        ItemStack[] MONSTER_BOOTS_RECIPE = {SlimefunItems.SYNTHETIC_SAPPHIRE, null, SlimefunItems.SYNTHETIC_SAPPHIRE,
+                REINFORCED_PHANTOM_MEMBRANE, null, REINFORCED_PHANTOM_MEMBRANE,
+                REINFORCED_PHANTOM_MEMBRANE, null, REINFORCED_PHANTOM_MEMBRANE,};
+
+        new MONSTER_BOOTS(itemGroup, MONSTER_BOOTS, RecipeType.ARMOR_FORGE, MONSTER_BOOTS_RECIPE).register(this);
+    }
+    @Override
+    public void onDisable() {
+        // Logic for disabling the plugin...
     }
 
     @Override
-    protected void enable() {
-        setup();
+    public String getBugTrackerURL() {
+        // You can return a link to your Bug Tracker instead of null here
+        return "github.com/lucasGithuber/RandomExpansion/issues";
     }
 
     @Override
-    protected void disable() {
-        // do cleanup if needed
+    public JavaPlugin getJavaPlugin() {
+        return this;
     }
 
-    public void setup() {
-        ItemGroup category = new ItemGroup(RandomExpansion.createKey("&eRandom Expansion"), new CustomItemStack(Material.ACACIA_DOOR, "&6Èx Limus"), 6);
-
-        SlimefunItemStack itemStack = new SlimefunItemStack("MONSTER_SCALE", Material.PHANTOM_MEMBRANE, "&4Monster Scale", "&4Dropped by the Monster Under The BeD");
-
-        new MONSTER_SCALE(category, itemStack, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]  {
-                new ItemStack(Material.PHANTOM_MEMBRANE),null              ,null,
-                null            ,             null                         ,null,
-                null            ,             null                         ,null
-        });
-    }
 }
