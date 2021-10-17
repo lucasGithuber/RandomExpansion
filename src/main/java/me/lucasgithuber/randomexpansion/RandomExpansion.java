@@ -7,11 +7,11 @@ import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.config.Config;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
-import me.lucasgithuber.randomexpansion.Resources.REINFORCED_PHANTOM_MEMBRANE;
-import me.lucasgithuber.randomexpansion.gear.MONSTER_BOOTS;
-import me.lucasgithuber.randomexpansion.gear.MONSTER_CHEST;
-import me.lucasgithuber.randomexpansion.gear.MONSTER_HELMET;
-import me.lucasgithuber.randomexpansion.gear.MONSTER_LEGGINGS;
+import me.lucasgithuber.randomexpansion.Resources.*;
+import me.lucasgithuber.randomexpansion.gear.MonsterBoots;
+import me.lucasgithuber.randomexpansion.gear.MonsterChest;
+import me.lucasgithuber.randomexpansion.gear.MonsterHelmet;
+import me.lucasgithuber.randomexpansion.gear.MonsterLeggings;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
@@ -41,7 +41,7 @@ public class RandomExpansion extends JavaPlugin implements SlimefunAddon {
                 SlimefunItems.REINFORCED_PLATE, new ItemStack(Material.PHANTOM_MEMBRANE), SlimefunItems.REINFORCED_PLATE,
                 SlimefunItems.HARDENED_METAL_INGOT, SlimefunItems.REINFORCED_PLATE, SlimefunItems.HARDENED_METAL_INGOT};
 
-        new REINFORCED_PHANTOM_MEMBRANE(itemGroup, REINFORCED_PHANTOM_MEMBRANE, RecipeType.ENHANCED_CRAFTING_TABLE, recipe).register(this);
+        new ReinforcedPhantomMembrane(itemGroup, REINFORCED_PHANTOM_MEMBRANE, RecipeType.ENHANCED_CRAFTING_TABLE, recipe).register(this);
          /*
          *monster helmet i guess
          */
@@ -51,7 +51,7 @@ public class RandomExpansion extends JavaPlugin implements SlimefunAddon {
                 REINFORCED_PHANTOM_MEMBRANE, null, REINFORCED_PHANTOM_MEMBRANE,
                 null, null, null,};
 
-        new MONSTER_HELMET(itemGroup, MONSTER_HELMET, RecipeType.ARMOR_FORGE, MONSTER_HELMET_RECIPE).register(this);
+        new MonsterHelmet(itemGroup, MONSTER_HELMET, RecipeType.ARMOR_FORGE, MONSTER_HELMET_RECIPE).register(this);
          /*
          *monster chestplate
          */
@@ -62,7 +62,7 @@ public class RandomExpansion extends JavaPlugin implements SlimefunAddon {
                 REINFORCED_PHANTOM_MEMBRANE, SlimefunItems.SYNTHETIC_SAPPHIRE, REINFORCED_PHANTOM_MEMBRANE,
                 REINFORCED_PHANTOM_MEMBRANE, REINFORCED_PHANTOM_MEMBRANE, REINFORCED_PHANTOM_MEMBRANE,};
 
-        new MONSTER_CHEST(itemGroup, MONSTER_CHEST, RecipeType.ARMOR_FORGE, MONSTER_CHEST_RECIPE).register(this);
+        new MonsterChest(itemGroup, MONSTER_CHEST, RecipeType.ARMOR_FORGE, MONSTER_CHEST_RECIPE).register(this);
         /*
          *monster leggings yikes
          */
@@ -73,7 +73,7 @@ public class RandomExpansion extends JavaPlugin implements SlimefunAddon {
                 REINFORCED_PHANTOM_MEMBRANE, null, REINFORCED_PHANTOM_MEMBRANE,
                 REINFORCED_PHANTOM_MEMBRANE, null, REINFORCED_PHANTOM_MEMBRANE,};
 
-        new MONSTER_LEGGINGS(itemGroup, MONSTER_LEGGINGS, RecipeType.ARMOR_FORGE, MONSTER_LEGGINGS_RECIPE).register(this);
+        new MonsterLeggings(itemGroup, MONSTER_LEGGINGS, RecipeType.ARMOR_FORGE, MONSTER_LEGGINGS_RECIPE).register(this);
         /*
          *monster boots '-' what did u expect
          */
@@ -84,7 +84,48 @@ public class RandomExpansion extends JavaPlugin implements SlimefunAddon {
                 REINFORCED_PHANTOM_MEMBRANE, null, REINFORCED_PHANTOM_MEMBRANE,
                 REINFORCED_PHANTOM_MEMBRANE, null, REINFORCED_PHANTOM_MEMBRANE,};
 
-        new MONSTER_BOOTS(itemGroup, MONSTER_BOOTS, RecipeType.ARMOR_FORGE, MONSTER_BOOTS_RECIPE).register(this);
+        new MonsterBoots(itemGroup, MONSTER_BOOTS, RecipeType.ARMOR_FORGE, MONSTER_BOOTS_RECIPE).register(this);
+
+        /*
+        *Animal dust
+         */
+
+
+        SlimefunItemStack ANIMAL_DUST= new SlimefunItemStack("ANIMAL_DUST", Material.REDSTONE, "&4Animal Dust ", "&4Meat Dust");
+
+        ItemStack[] ANIMAL_DUST_RECIPE = {new ItemStack(Material.MUTTON), null, null, null ,null ,null ,null ,null ,null};
+
+        new AnimalDust(itemGroup, ANIMAL_DUST, RecipeType.ORE_CRUSHER, ANIMAL_DUST_RECIPE).register(this);
+
+        /*
+        *Animal ingot
+         */
+
+        SlimefunItemStack ANIMAL_INGOT= new SlimefunItemStack("ANIMAL_INGOT", Material.NETHER_BRICK, "&4Animal Ingot ", "&4Meat Ingot");
+
+        ItemStack[] ANIMAL_INGOT_RECIPE = {ANIMAL_DUST, null, null, null ,null ,null ,null ,null ,null};
+
+        new AnimalIngot(itemGroup, ANIMAL_INGOT, RecipeType.SMELTERY, ANIMAL_INGOT_RECIPE).register(this);
+        /*
+        *Monster dust
+         */
+
+        SlimefunItemStack MONSTER_DUST= new SlimefunItemStack("MONSTER_DUST", Material.GUNPOWDER, "&4Monster Dust", "");
+
+        ItemStack[] MONSTER_DUST_RECIPE = {new ItemStack(Material.ROTTEN_FLESH), null, null, null ,null ,null ,null ,null ,null};
+
+        new MonsterDust(itemGroup, MONSTER_DUST, RecipeType.ORE_CRUSHER, MONSTER_DUST_RECIPE).register(this);
+
+        /*
+        *Dark Heart
+         */
+
+
+        SlimefunItemStack DARK_HEART= new SlimefunItemStack("DARK_HEART", Material.MAGMA_CREAM, "&4Dark heart", "&4Contains the essence of various mobs...");
+
+        ItemStack[] DARK_HEART_RECIPE = {MONSTER_DUST, SlimefunItems.ESSENCE_OF_AFTERLIFE, MONSTER_DUST, SlimefunItems.VILLAGER_RUNE, ANIMAL_INGOT, SlimefunItems.VILLAGER_RUNE, MONSTER_DUST, SlimefunItems.VILLAGER_RUNE, MONSTER_DUST};
+
+        new DarkHeart(itemGroup, DARK_HEART, RecipeType.ANCIENT_ALTAR, DARK_HEART_RECIPE).register(this);
     }
     @Override
     public void onDisable() {
